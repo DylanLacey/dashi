@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require 'dashi'
+
+Dashi.recreate_from_session_id ARGV[0], ARGV[1]

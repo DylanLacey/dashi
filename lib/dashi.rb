@@ -25,6 +25,7 @@ module Dashi
       Dashi.logger.info "Asked to recreate job from #{session_id} using #{formatter}"
 
       sauce_log = SauceLog.new.sauce_log :id => session_id
+      STDOUT.puts sauce_log
       recreate sauce_log, formatter, output_filename, session_id
     end
 
@@ -51,6 +52,7 @@ module Dashi
 
       template = TestTemplate.new capabilities, test_script, File.join(File.dirname(__FILE__), 'dashi', 'test_shell.rb.erb')
       template.write (output_filename)
+      puts "Wrote regenerated test to #{output_filename}.  IT'S ALLLLIIIIVE!"
     end
 
     def match_command_to_formatter command, formatter
