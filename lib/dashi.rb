@@ -23,9 +23,10 @@ module Dashi
 
     def recreate_from_session_id session_id, formatter = Formatter::Lang::Ruby, output_filename
       Dashi.logger.info "Asked to recreate job from #{session_id} using #{formatter}"
+      Bonito.logger.level = Logger::WARN
+      Dashi.logger.level = Logger::WARN
 
       sauce_log = SauceLog.new.sauce_log :id => session_id
-      STDOUT.puts sauce_log
       recreate sauce_log, formatter, output_filename, session_id
     end
 
