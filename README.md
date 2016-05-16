@@ -1,31 +1,30 @@
 # Dashi
 
-TODO: Write a gem description
+Turns a Sauce Labs session into an executable test
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Most important step: Promise you won't judge me for my awful code.
 
-```ruby
-gem 'dashi'
-```
+Clone this repo, DylanLacey/bonito and DylanLacey/konbu.
 
-And then execute:
+Update the `:path` for bonito and konbu in this repo's Gemfile
+Update the `:path` for konbu in bonito's Gemfile
 
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install dashi
+Run `bundle install` in this gem's directory.
 
 ## Usage
 
-TODO: Write usage instructions here
+`bundle exec dashi session_id filename`
 
-## Contributing
+## Fun and Exciting Known Bugs
+* Only works for desktop platforms
+* Does not know how to give elements unique names or refer to new elements (This is being worked on in a branch but is a hideous mess)
+* Only knows how to create a session, open a webpage, find an element or quit.  Concept: The proof of it.
 
-1. Fork it ( https://github.com/[my-github-username]/dashi/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+## Future Features
+* DSL for new languages
+* Ability to construct slightly more complex language ... constructs, like Spin Asserts & fluent operations:
+  `driver.find_element(:id, 'rad_button').click
+* Mobile platforms
+* Spiders!
