@@ -3,11 +3,16 @@ module Dashi
     module Lang
     end
 
+
+    # Maybe this entire thing is awful and I should be using a #render strategy the whole way through
+    # inc. some sort of hand-made partial support.
+    #
+    # That's probably friendliest
     class Command
       @language_method = 'Nothing'
 
       class << self
-        attr_accessor :language_method, :is_element
+        attr_accessor :language_method, :is_element, :is_assignment
       end
 
       attr_accessor :string_quoter, :argument_separator, :language_method, :command, :driver_name
@@ -49,9 +54,37 @@ module Dashi
         arguments = format_arguments
         language_method = self.class.language_method
 
-        method_call = "#{driver_name}.#{language_method} #{arguments}"
-        method_call.prepend "element = " if self.class.is_element
+        method_call = "#{language_method} #{arguments}"
+        prepend_string = ""
+        # This really belongs in another class; Either the Command or a Formatter
+        if self.class.is_element
+          if self.class.is_assignment
+            command.element_name = new_element_name
+
+            # This needs to be some sort of Type formatter for Java and Friends.
+            # Poor Java and Friends.
+            prepend_string = "#{command.element_name} = #{driver_name}."
+          else
+            element_name = find_element_name command
+            # Element name doesn't _really_ belong in the ElementCommands
+            prepend_string = "#{element_name}."
+          end
+        else
+          prepend_string = "#{driver_name}."
+        end
+
+        method_call.prepend prepend_string
+
         return method_call
+      end
+
+      # Generate a random name for now;  We'll get smarter later
+      def new_element_name
+        ('a'..'z').to_a.shuffle[0,8].join
+      end
+
+      def find_element_name command
+        command.element_name
       end
     end
 	end

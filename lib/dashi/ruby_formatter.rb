@@ -25,6 +25,7 @@ module Dashi
         class ElementLocationCommand < Command
           @language_method = 'find_element'
           @is_element = true
+          @is_assignment = true
 
           def format_arguments 
             original_arguments = command.to_arguments_hash
@@ -33,6 +34,12 @@ module Dashi
 
             combine_and_wrap_arguments [strategy, search_term]
           end
+        end
+
+        class SendKeysToElement < Command
+          @language_method = 'send_keys'
+          @is_element = true
+          @is_assignment = false
         end
       end
     end
