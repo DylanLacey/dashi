@@ -6,10 +6,7 @@ Turns a Sauce Labs session into an executable test
 
 Most important step: Promise you won't judge me for my awful code.
 
-Clone this repo, DylanLacey/bonito and DylanLacey/konbu.
-
-Update the `:path` for bonito and konbu in this repo's Gemfile
-Update the `:path` for konbu in bonito's Gemfile
+Clone this repo, and check you can access DylanLacey/bonito and DylanLacey/konbu.
 
 Run `bundle install` in this gem's directory.
 
@@ -19,12 +16,12 @@ Run `bundle install` in this gem's directory.
 
 ## Fun and Exciting Known Bugs
 * Only works for desktop platforms
-* Does not know how to give elements unique names or refer to new elements (This is being worked on in a branch but is a hideous mess)
-* Only knows how to create a session, open a webpage, find an element or quit.  Concept: The proof of it.
+* Only works for finding, `send_keys`, booting and quitting a session. Concept: The proof of it.
+* Gives elements random names!
 
 ## Future Features
 * DSL for new languages
-* Ability to construct slightly more complex language ... constructs, like Spin Asserts & fluent operations:
+* Ability to construct slightly more complex language constructs, like Spin Asserts & fluent operations:
   `driver.find_element(:id, 'rad_button').click
 * Mobile platforms
-* Spiders!
+* Spiders!  :spider:
