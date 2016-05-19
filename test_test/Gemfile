@@ -1,0 +1,4 @@
+source "https://www.rubygems.org"
+
+gem "selenium-webdriver"
+gem "net-http-persistent"
