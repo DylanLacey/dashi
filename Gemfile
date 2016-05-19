@@ -4,8 +4,10 @@ source 'https://rubygems.org'
 gemspec
 
 gem "konbu", :git => "git@github.com:DylanLacey/konbu.git"
-gem "bonito", :git => "git@github.com:DylanLacey/bonito.git"
+#gem "bonito", :git => "git@github.com:DylanLacey/bonito.git"
+gem "bonito", :path => "/Users/dylanlacey/Projects/bonito"
 gem "sauce_whisk"
+
 gem "httparty"
 gem "activesupport"
 gem "tilt"

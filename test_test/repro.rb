@@ -47,7 +47,7 @@ driver = Selenium::WebDriver.for :remote, :url => auth_endpoint, :desired_capabi
 STDERR.puts "My ID is #{driver.session_id}"
 driver.navigate.to "http://www.google.com"
 element_1 = driver.find_element :name, 'q'
-element_2 = driver.find_element :name, 'btnK'
-
 element_1.send_keys "How good is Selenium?"
+element_2 = driver.find_element :name, 'btnG'
+element_2.click
 driver.quit 

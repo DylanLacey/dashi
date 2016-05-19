@@ -41,6 +41,15 @@ module Dashi
           @is_element = true
           @is_assignment = false
         end
+
+        class ClickElementCommand < Command
+          @language_method = 'click'
+          @is_element = true
+
+          def format_arguments
+            ""
+          end
+        end
       end
     end
   end
