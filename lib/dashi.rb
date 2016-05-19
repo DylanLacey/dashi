@@ -7,6 +7,7 @@ require "active_support/inflector"
 require_relative "dashi/sauce_log"
 require_relative "dashi/ruby_formatter"
 require_relative "dashi/test_template"
+require_relative "dashi/element_namer"
 
 module Dashi
   class << self
@@ -75,6 +76,10 @@ module Dashi
       {
         :LoadResourceCommand => "Get"
       }
+    end
+
+    def default_namer
+      @default_namer ||= RandomElementNamer.new
     end
   end
 end

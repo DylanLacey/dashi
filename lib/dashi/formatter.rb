@@ -1,3 +1,5 @@
+require_relative "element_namer"
+
 module Dashi
 	module Formatter
     module Lang
@@ -16,12 +18,14 @@ module Dashi
       end
 
       attr_accessor :string_quoter, :argument_separator, :language_method, :command, :driver_name
+      attr_reader = :namer
 
-      def initialize command, test, opts={}
+      def initialize command, test, namer = Dashi.default_namer, opts={}
         @command = command
         @string_quoter ||= '"'
         @argument_separator ||= ', '
         @driver_name ||= 'driver'
+        @namer = namer
       end
 
       # Wrap strings in quotes; Otherwise return the value
@@ -59,13 +63,13 @@ module Dashi
         # This really belongs in another class; Either the Command or a Formatter
         if self.class.is_element
           if self.class.is_assignment
-            command.element_name = new_element_name
+            element_name = @namer.name command.element
 
             # This needs to be some sort of Type formatter for Java and Friends.
             # Poor Java and Friends.
-            prepend_string = "#{command.element_name} = #{driver_name}."
+            prepend_string = "#{element_name} = #{driver_name}."
           else
-            element_name = find_element_name command
+            element_name = @namer.find_name command.element
             # Element name doesn't _really_ belong in the ElementCommands
             prepend_string = "#{element_name}."
           end
