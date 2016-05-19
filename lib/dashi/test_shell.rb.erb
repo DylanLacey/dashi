@@ -45,6 +45,7 @@ end
 def caps
  caps = <%= desired_capabilities.to_h %>
 
+ caps['name'] = "A Test Made with Dashi"
  return caps
 end
 
