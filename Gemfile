@@ -3,8 +3,8 @@ source 'https://rubygems.org'
 # Specify your gem's dependencies in dashi.gemspec
 gemspec
 
-gem "konbu", :path => "/users/dylanlacey/projects/konbu"
-gem "bonito", :path => "/users/dylanlacey/projects/bonito"
+gem "konbu", :git => "git@github.com:DylanLacey/konbu.git"
+gem "bonito", :git => "git@github.com:DylanLacey/bonito.git"
 gem "sauce_whisk"
 gem "httparty"
 gem "activesupport"
