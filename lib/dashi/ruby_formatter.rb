@@ -42,12 +42,23 @@ module Dashi
           @is_assignment = false
         end
 
-        class ClickElementCommand < Command
-          @language_method = 'click'
-          @is_element = true
+        # Define all of the argument_less element commands
+        {
+          "Click" => "click", 
+          "VisibilityOf" => "displayed?", 
+          "LocationOf" => "location", 
+          "SizeOf" => "size", 
+          "TextOf" => "text"
+        }.each do |name, cmd|
+          class_name = "#{name}ElementCommand"
 
-          def format_arguments
-            ""
+          Formatter::Lang::Ruby.const_set class_name, Class.new(Command) do
+            @language_method = cmd
+            @is_element = true
+
+            def format_arguments
+              ""
+            end
           end
         end
       end

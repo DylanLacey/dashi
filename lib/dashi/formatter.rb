@@ -50,8 +50,11 @@ module Dashi
           
 
       def format_arguments 
-        argument = [command.to_arguments_hash.values.first]
-        combine_and_wrap_arguments argument
+        if command.respond_to? :to_arguments_hash
+          argument = [command.to_arguments_hash.values.first]
+          return combine_and_wrap_arguments argument
+        end
+        ""
       end
       
       def format
