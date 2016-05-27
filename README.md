@@ -51,4 +51,5 @@ Once the commands are formatter, they're passed to a test shell template that do
 * Ability to construct slightly more complex language constructs, like Spin Asserts & fluent operations:
   `driver.find_element(:id, 'rad_button').click
 * Mobile platforms
+* Reasonable Names!
 * Spiders!  :spider:
