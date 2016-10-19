@@ -42,7 +42,8 @@ Once the commands are formatter, they're passed to a test shell template that do
 
 ## Fun and Exciting Known Bugs
 * Only works for desktop platforms
-* Only works for finding, `send_keys`, booting and quitting a session. Concept: The proof of it.
+* Some platforms are named incorrectly
+* Only works for finding, `send_keys`, clearing, booting and quitting a session. Concept: The proof of it.
 * *BONUS* Clicking!
 * Gives elements random names!
 

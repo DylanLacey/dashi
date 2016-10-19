@@ -7,9 +7,9 @@ module Dashi
       @names = {}
     end
 
-    def name element
+    def name element, type_of_name = :element
       name = generate_name element
-      names[element] = name
+      names[element] = name if type_of_name == :element
 
       return name
     end
@@ -18,15 +18,15 @@ module Dashi
       name = names[element] || nil
     end
 
-    def find_or_create_name element
-      found_name = find_name
-      return name element if found_name.nil?
+    def find_or_create_name element, type_of_name = :element
+      found_name = find_name element
+      return name element, type_of_name if found_name.nil?
       return found_name
     end
 
     private 
 
-    def generate_name element
+    def generate_name element, type_of_name
       raise TypeError "don't use ElementNamer directly; If you don't care, use RandomElementNamer"
     end
   end

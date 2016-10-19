@@ -15,14 +15,14 @@ module Dashi
       @@logger ||= Logger.new(STDOUT)
     end
 
-    def recreate_from_file filename, formatter = Formatter::Lang::Ruby, output_filename
+    def recreate_from_file filename, formatter = Formatter::Ruby, output_filename
       Dashi.logger.info "Asked to recreate job from #{filename} using #{formatter}"
       sauce_log = File.read filename
 
       recreate sauce_log, formatter, output_filename
     end
 
-    def recreate_from_session_id session_id, formatter = Formatter::Lang::Ruby, output_filename
+    def recreate_from_session_id session_id, formatter = Formatter::Ruby, output_filename
       Dashi.logger.info "Asked to recreate job from #{session_id} using #{formatter}"
       Bonito.logger.level = Logger::WARN
       Dashi.logger.level = Logger::WARN
@@ -60,8 +60,8 @@ module Dashi
     def match_command_to_formatter command, formatter
       command_name = command_name_from_class command
       formatter_name = rename_command command_name
-
-      formatter.const_get formatter_name, false
+      fm = formatter.const_get formatter_name, false
+      return fm
     end
 
     def command_name_from_class command

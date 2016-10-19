@@ -3,8 +3,21 @@ require_relative "element_namer"
 module Dashi
 	module Formatter
     module Lang
-    end
+      module ClassModules
+        def no_argument_command klass, command
+          const_set klass, Class.new(Command) {}
+        end
 
+        def single_argument_command klass, command
+          const_set klass, Class.new(Command) { @language_method = command }
+        end
+      end
+
+
+      def self.included base_module
+        base_module.extend ClassModules
+      end
+    end
 
     # Maybe this entire thing is awful and I should be using a #render strategy the whole way through
     # inc. some sort of hand-made partial support.
@@ -14,13 +27,14 @@ module Dashi
       @language_method = 'Nothing'
 
       class << self
-        attr_accessor :language_method, :is_element, :is_assignment
+        attr_accessor :language_method, :is_element, :is_assignment, :is_external_assignment
       end
 
       attr_accessor :string_quoter, :argument_separator, :language_method, :command, :driver_name
       attr_reader = :namer
 
       def initialize command, test, namer = Dashi.default_namer, opts={}
+        #STDERR.puts "Creating command for #{command} - #{self.class.language_method}"
         @command = command
         @string_quoter ||= '"'
         @argument_separator ||= ', '
@@ -31,7 +45,7 @@ module Dashi
       # Wrap strings in quotes; Otherwise return the value
       def wrap_if_required string_to_wrap
         case string_to_wrap
-        when -> (a) { [URI::HTTP, String].include? a.class }
+        when -> (a) { [URI::HTTP, URI::HTTPS, String].include? a.class }
           quoted_string = string_quoter.dup
           quoted_string << string_to_wrap.to_s
           quoted_string << string_quoter
@@ -72,9 +86,15 @@ module Dashi
             # Poor Java and Friends.
             prepend_string = "#{element_name} = #{driver_name}."
           else
+            puts "Finding #{command.element} for #{language_method}"
             element_name = @namer.find_name command.element
             # Element name doesn't _really_ belong in the ElementCommands
             prepend_string = "#{element_name}."
+
+            if self.class.is_external_assignment
+              variable_name = @namer.name command.element_id, :variable
+              prepend_string = "#{variable_name} = #{prepend_string}"
+            end
           end
         else
           prepend_string = "#{driver_name}."

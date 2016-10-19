@@ -4,6 +4,7 @@ module Dashi
     attr_reader :formatter
 
     def initialize formatter
+      STDERR.puts "I am #{self}"
       @formatter = formatter
     end
 
