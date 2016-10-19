@@ -44,10 +44,11 @@ module Dashi
 
       # Wrap strings in quotes; Otherwise return the value
       def wrap_if_required string_to_wrap
+        
         case string_to_wrap
         when -> (a) { [URI::HTTP, URI::HTTPS, String].include? a.class }
           quoted_string = string_quoter.dup
-          quoted_string << string_to_wrap.to_s
+          quoted_string << string_to_wrap.to_s.inspect[1..-2]
           quoted_string << string_quoter
           return quoted_string
         when -> (a) { [Symbol].include? a.class }
