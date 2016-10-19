@@ -36,7 +36,7 @@ You can then run the test again with
 
 `dashi` is fetching the Sauce Log which is eventually passed to `konbu`, then consuming the classified commands and passing them, one by one, to the relevant formatting class (one for each command).
 
-Each of these classes is based on an abstract implementation which knows how to get the details it needs from the Command; The concrete implementations are for a specific language and know how to format for that language.  This is the worst bit currently;  I think there should be one formatter that `include`s a language's patterns at runtime.  Ideally, we could generate patterns through :wave::sparkles::sparkling_heart:_metaprogramming::sparkling_heart::sparkles::wave:.
+Each of these classes is based on an abstract implementation which knows how to get the details it needs from the Command; The concrete implementations are for a specific language and know how to format for that language.  This is the worst bit currently;  I think there should be one formatter that `include`s a language's patterns at runtime.  Ideally, we could generate patterns through :wave::sparkles::sparkling_heart:_metaprogramming_:sparkling_heart::sparkles::wave:.
 
 Once the commands are formatter, they're passed to a test shell template that does all the required library inclusions.  Rather then string contatenation, this is done using ERB, the built in Ruby formatting engine.  I think it'd be best to redo the above by having each individual command render with ERB, in part because it makes the metaprogramming easier.
 
@@ -51,7 +51,7 @@ Once the commands are formatter, they're passed to a test shell template that do
 * DSL for new languages
 * Other Commands!
 * Ability to construct slightly more complex language constructs, like Spin Asserts & fluent operations:
-  `driver.find_element(:id, 'rad_button').click
+  `driver.find_element(:id, 'rad_button').click`
 * Mobile platforms
 * Reasonable Names!
 * Spiders!  :spider:
