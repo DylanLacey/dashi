@@ -79,7 +79,7 @@ module Dashi
     end
 
     def default_namer
-      @default_namer ||= RandomElementNamer.new
+      @default_namer ||= SequentialElementNamer.new
     end
   end
 end

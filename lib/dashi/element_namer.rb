@@ -27,7 +27,7 @@ module Dashi
     private 
 
     def generate_name element, type_of_name
-      raise TypeError "don't use ElementNamer directly; If you don't care, use RandomElementNamer"
+      raise TypeError "don't use ElementNamer directly; If you don't care, use RandomElementNamer or SequentialElementNamer"
     end
   end
 
@@ -36,6 +36,21 @@ module Dashi
 
     def generate_name element
       ('a'..'z').to_a.shuffle[0,8].join
+    end
+  end
+
+  class SequentialElementNamer
+    include ElementNamer
+    attr_accessor :element_count
+
+    def initialize
+      @element_count = 0
+      super
+    end
+
+    def generate_name element
+      @element_count+= 1
+      "element_#{@element_count}"
     end
   end
 end
